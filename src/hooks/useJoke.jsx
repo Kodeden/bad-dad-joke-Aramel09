@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useJoke() {
-  const [jokes, setJokes] = useState("");
+  const [jokes, setJokes] = useState(null);
   const [goodJokes, setGoodJokes] = useState([]);
   const [badJokes, setBadJokes] = useState([]);
 
@@ -11,7 +11,7 @@ export default function useJoke() {
     } else if (e.target.textContent.includes("Bad")) {
       setBadJokes((prev) => [...prev, jokes]);
     }
-    setJokes("");
+    setJokes(null);
   }
 
   return [jokes, setJokes, goodJokes, handleClick, badJokes];
