@@ -1,56 +1,21 @@
-import { useState } from "react";
+import JokeButton from "./components/JokeButton";
+import JokeText from "./components/JokeText";
+import JokeVote from "./components/JokeVote";
+import useJoke from "./hooks/useJoke";
 
 function App() {
-  const [jokes, setJokes] = useState("");
-  const [goodJokes, setGoodJokes] = useState([]);
-  const [badJokes, setBadJokes] = useState([]);
-
-  const fetchJokes = () => {
-    fetch("https://official-joke-api.appspot.com/random_joke")
-      .then((res) => res.json())
-      .then((data) => setJokes(data));
-  };
-
-  function handleClickGJ() {
-    setGoodJokes((prev) => [...prev, jokes]);
-  }
-
-  function handleClickBJ() {
-    setBadJokes((prev) => [...prev, jokes]);
-  }
-
-  const arrayBadJokes = [];
-  arrayBadJokes.push(jokes);
+  const [jokes, setJokes, goodJokes, handleClick, badJokes] = useJoke();
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button onClick={() => fetchJokes()}>Joke</button>
-      <p>{jokes.setup}</p>
-      <p>{jokes.punchline}</p>
+      <JokeButton setJokes={setJokes} />
 
-      <div></div>
-      <button onClick={() => handleClickGJ()}>Good Joke</button>
-      <div>
-        <ul>
-          {goodJokes.map((data) => (
-            <li key={data.id}>
-              {data.setup} - {data.punchline}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div></div>
-      <button onClick={() => handleClickBJ()}>Bad Joke</button>
-      <div>
-        <ul>
-          {badJokes.map((data) => (
-            <li key={data.id}>
-              {data.setup} - {data.punchline}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <JokeText jokes={jokes} />
+      <JokeVote
+        handleClick={handleClick}
+        goodJokes={goodJokes}
+        badJokes={badJokes}
+      />
     </>
   );
 }
