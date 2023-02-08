@@ -6,9 +6,9 @@ export default function useJoke() {
   const [badJokes, setBadJokes] = useState([]);
 
   function handleClick(e) {
-    if (e.target.textContent.includes("Good")) {
+    if (e.target.textContent.includes("👍🏽")) {
       setGoodJokes((prev) => [...prev, jokes]);
-    } else if (e.target.textContent.includes("Bad")) {
+    } else if (e.target.textContent.includes("👎🏽")) {
       setBadJokes((prev) => [...prev, jokes]);
     }
     setJokes(null);
