@@ -8,7 +8,12 @@ export default function JokeButton({ setJokes }) {
   };
   return (
     <>
-      <button onClick={() => fetchJokes()}>Joke</button>
+      <button
+        className=" rounded bg-sky-500 px-3 py-1 text-white"
+        onClick={() => fetchJokes()}
+      >
+        Get Joke
+      </button>
     </>
   );
 }
